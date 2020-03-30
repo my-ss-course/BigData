@@ -9,9 +9,11 @@ docker run -itd --restart=always --net hadoop  --ip 172.18.0.3 --privileged -p 1
 echo "start hadoop-node3 container..."
 docker run -itd --restart=always --net hadoop  --ip 172.18.0.4 --privileged -p 18043:8042 -p 51011:50011 -p 51021:50021 --name hadoop-node3 --hostname hadoop-node3 --add-host hadoop-node1:172.18.0.2 --add-host hadoop-node2:172.18.0.3  centos-hadoop /bin/bash
 
+sleep 5
 docker exec -it hadoop-node1 /usr/sbin/sshd
 docker exec -it hadoop-node2 /usr/sbin/sshd
 docker exec -it hadoop-node3 /usr/sbin/sshd
+sleep 5
 docker exec -it hadoop-node1 /usr/local/hadoop-2.8.5/start-hadoop.sh 
 
 echo finished
